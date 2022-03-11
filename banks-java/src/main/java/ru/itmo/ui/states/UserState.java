@@ -1,9 +1,9 @@
 package ru.itmo.ui.states;
 
 import java.util.Scanner;
-import ru.itmo.bankSystem.Bank;
-import ru.itmo.bankSystem.CentralBank;
-import ru.itmo.bankSystem.Client;
+import ru.itmo.bank.Bank;
+import ru.itmo.bank.CentralBank;
+import ru.itmo.bank.Client;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 import ru.itmo.tools.bankExceptions.BankAlreadyExistException;
 import ru.itmo.tools.bankExceptions.BankNotExistException;

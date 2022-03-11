@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.itmo.bankSystem.Bank;
-import ru.itmo.bankSystem.CentralBank;
-import ru.itmo.bankSystem.Client;
-import ru.itmo.bankSystem.clientBuilder.Builder;
-import ru.itmo.bankSystem.clientBuilder.Director;
-import ru.itmo.bankSystem.offers.CreditOffer;
-import ru.itmo.bankSystem.offers.DebitOffer;
-import ru.itmo.bankSystem.offers.DepositOffer;
+import ru.itmo.bank.Bank;
+import ru.itmo.bank.CentralBank;
+import ru.itmo.bank.Client;
+import ru.itmo.bank.builder.ClientBuilder;
+import ru.itmo.bank.builder.ClientDirector;
+import ru.itmo.bank.offers.CreditOffer;
+import ru.itmo.bank.offers.DebitOffer;
+import ru.itmo.bank.offers.DepositOffer;
 import ru.itmo.tools.accountExceptions.AccountNotFoundException;
 import ru.itmo.tools.accountExceptions.ArgumentNullException;
 import ru.itmo.tools.accountExceptions.CommissionMoreThanLimitDoubtfulAccountException;
@@ -68,8 +68,8 @@ public class BankTest {
     bank2.addOffer(new DebitOffer((float) 12.3, 10000));
     bank2.addOffer(new DepositOffer(from, interest, 10000));
 
-    Builder builder = new Builder();
-    Director director = new Director();
+    ClientBuilder builder = new ClientBuilder();
+    ClientDirector director = new ClientDirector();
     director.setBuilder(builder);
     director.buildClient("Лыв Вацу", "123", null, null, null);
     client1 = builder.getClient();

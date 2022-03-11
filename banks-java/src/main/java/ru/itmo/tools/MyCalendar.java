@@ -2,7 +2,7 @@ package ru.itmo.tools;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import ru.itmo.bankSystem.CentralBank;
+import ru.itmo.bank.CentralBank;
 import ru.itmo.tools.accountExceptions.IncorrectDateForDepositException;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 

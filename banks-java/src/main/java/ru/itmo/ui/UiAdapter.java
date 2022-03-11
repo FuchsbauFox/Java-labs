@@ -5,16 +5,16 @@ import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import ru.itmo.bankSystem.Bank;
-import ru.itmo.bankSystem.CentralBank;
-import ru.itmo.bankSystem.Client;
-import ru.itmo.bankSystem.Offer;
-import ru.itmo.bankSystem.accounts.DepositAccount;
-import ru.itmo.bankSystem.clientBuilder.Builder;
-import ru.itmo.bankSystem.clientBuilder.Director;
-import ru.itmo.bankSystem.offers.CreditOffer;
-import ru.itmo.bankSystem.offers.DebitOffer;
-import ru.itmo.bankSystem.offers.DepositOffer;
+import ru.itmo.bank.Bank;
+import ru.itmo.bank.CentralBank;
+import ru.itmo.bank.Client;
+import ru.itmo.bank.Offer;
+import ru.itmo.bank.accounts.DepositAccount;
+import ru.itmo.bank.builder.ClientBuilder;
+import ru.itmo.bank.builder.ClientDirector;
+import ru.itmo.bank.offers.CreditOffer;
+import ru.itmo.bank.offers.DebitOffer;
+import ru.itmo.bank.offers.DepositOffer;
 import ru.itmo.tools.MyCalendar;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 import ru.itmo.tools.bankExceptions.ClientNotFoundException;
@@ -335,8 +335,8 @@ public class UiAdapter {
 
   private Client createClient(String fullName, String password)
       throws InvalidPassportException, InvalidClientNameException, IncorrectPassword, InvalidAddressException {
-    var builder = new Builder();
-    var director = new Director();
+    var builder = new ClientBuilder();
+    var director = new ClientDirector();
     director.setBuilder(builder);
     System.out.println("If you do not want to enter data, then enter -");
 
