@@ -1,6 +1,6 @@
 package ru.itmo.ui;
 
-import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
+import ru.itmo.tool.accountException.TransactionCannotBeMade;
 
 public abstract class UiState {
 

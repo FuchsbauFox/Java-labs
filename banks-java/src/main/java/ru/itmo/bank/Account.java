@@ -2,9 +2,9 @@ package ru.itmo.bank;
 
 import java.util.Calendar;
 import java.util.List;
-import ru.itmo.bank.accounts.LogTypes;
-import ru.itmo.bank.accounts.TransactionLog;
-import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
+import ru.itmo.bank.account.LogTypes;
+import ru.itmo.bank.account.TransactionLog;
+import ru.itmo.tool.accountException.TransactionCannotBeMade;
 
 public interface Account {
 

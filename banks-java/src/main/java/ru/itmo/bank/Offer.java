@@ -1,6 +1,6 @@
 package ru.itmo.bank;
 
-import ru.itmo.bank.offers.behaviors.Behavior;
+import ru.itmo.bank.offer.behavior.Behavior;
 
 public interface Offer {
 

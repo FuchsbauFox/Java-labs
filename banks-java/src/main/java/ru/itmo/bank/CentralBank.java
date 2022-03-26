@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import ru.itmo.tools.bankExceptions.BankAlreadyExistException;
-import ru.itmo.tools.bankExceptions.BankCannotBeAddedException;
-import ru.itmo.tools.bankExceptions.BankNotExistException;
-import ru.itmo.tools.bankExceptions.InvalidBankNameException;
+import ru.itmo.tool.bankException.BankAlreadyExistException;
+import ru.itmo.tool.bankException.BankCannotBeAddedException;
+import ru.itmo.tool.bankException.BankNotExistException;
+import ru.itmo.tool.bankException.InvalidBankNameException;
 
 public class CentralBank {
 

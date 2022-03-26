@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import ru.itmo.bank.offers.DepositOffer;
-import ru.itmo.tools.accountExceptions.IncorrectDateForDepositException;
-import ru.itmo.tools.bankExceptions.AccountCannotBeCreatedException;
-import ru.itmo.tools.bankExceptions.ClientCannotBeAttach;
-import ru.itmo.tools.bankExceptions.ClientNotFoundException;
-import ru.itmo.tools.bankExceptions.InvalidBankNameException;
-import ru.itmo.tools.bankExceptions.OfferAlreadyExistException;
-import ru.itmo.tools.bankExceptions.OfferNotExistException;
-import ru.itmo.tools.bankExceptions.TypesInfoAccountDifferentException;
-import ru.itmo.tools.clientExceptions.IncorrectPassword;
+import ru.itmo.bank.offer.DepositOffer;
+import ru.itmo.tool.accountException.IncorrectDateForDepositException;
+import ru.itmo.tool.bankException.AccountCannotBeCreatedException;
+import ru.itmo.tool.bankException.ClientCannotBeAttach;
+import ru.itmo.tool.bankException.ClientNotFoundException;
+import ru.itmo.tool.bankException.InvalidBankNameException;
+import ru.itmo.tool.bankException.OfferAlreadyExistException;
+import ru.itmo.tool.bankException.OfferNotExistException;
+import ru.itmo.tool.bankException.TypesInfoAccountDifferentException;
+import ru.itmo.tool.clientException.IncorrectPassword;
 
 public class Bank {
 

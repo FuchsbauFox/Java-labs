@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import ru.itmo.bank.accounts.LogTypes;
-import ru.itmo.bank.accounts.Transfer;
-import ru.itmo.tools.accountExceptions.AccountNotFoundException;
-import ru.itmo.tools.accountExceptions.ErrorCancelTransaction;
-import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
-import ru.itmo.tools.accountExceptions.TransactionNotFoundException;
-import ru.itmo.tools.clientExceptions.IncorrectPassword;
-import ru.itmo.tools.clientExceptions.InvalidAddressException;
-import ru.itmo.tools.clientExceptions.InvalidClientNameException;
-import ru.itmo.tools.clientExceptions.InvalidPassportException;
+import ru.itmo.bank.account.LogTypes;
+import ru.itmo.bank.account.Transfer;
+import ru.itmo.tool.accountException.AccountNotFoundException;
+import ru.itmo.tool.accountException.ErrorCancelTransaction;
+import ru.itmo.tool.accountException.TransactionCannotBeMade;
+import ru.itmo.tool.accountException.TransactionNotFoundException;
+import ru.itmo.tool.clientException.IncorrectPassword;
+import ru.itmo.tool.clientException.InvalidAddressException;
+import ru.itmo.tool.clientException.InvalidClientNameException;
+import ru.itmo.tool.clientException.InvalidPassportException;
 
 public class Client {
 

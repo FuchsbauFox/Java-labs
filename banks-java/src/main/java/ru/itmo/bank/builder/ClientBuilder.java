@@ -1,10 +1,10 @@
 package ru.itmo.bank.builder;
 
 import ru.itmo.bank.Client;
-import ru.itmo.tools.clientExceptions.IncorrectPassword;
-import ru.itmo.tools.clientExceptions.InvalidAddressException;
-import ru.itmo.tools.clientExceptions.InvalidClientNameException;
-import ru.itmo.tools.clientExceptions.InvalidPassportException;
+import ru.itmo.tool.clientException.IncorrectPassword;
+import ru.itmo.tool.clientException.InvalidAddressException;
+import ru.itmo.tool.clientException.InvalidClientNameException;
+import ru.itmo.tool.clientException.InvalidPassportException;
 
 public class ClientBuilder {
 

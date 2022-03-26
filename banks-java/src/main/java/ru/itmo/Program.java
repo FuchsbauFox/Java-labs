@@ -1,6 +1,6 @@
 package ru.itmo;
 
-import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
+import ru.itmo.tool.accountException.TransactionCannotBeMade;
 import ru.itmo.ui.UiMain;
 
 public class Program {

@@ -1,7 +1,7 @@
 package ru.itmo.ui.states;
 
 import java.util.Scanner;
-import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
+import ru.itmo.tool.accountException.TransactionCannotBeMade;
 import ru.itmo.ui.UiAdapter;
 import ru.itmo.ui.UiState;
 

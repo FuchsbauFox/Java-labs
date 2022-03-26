@@ -9,20 +9,20 @@ import ru.itmo.bank.Bank;
 import ru.itmo.bank.CentralBank;
 import ru.itmo.bank.Client;
 import ru.itmo.bank.Offer;
-import ru.itmo.bank.accounts.DepositAccount;
+import ru.itmo.bank.account.DepositAccount;
 import ru.itmo.bank.builder.ClientBuilder;
 import ru.itmo.bank.builder.ClientDirector;
-import ru.itmo.bank.offers.CreditOffer;
-import ru.itmo.bank.offers.DebitOffer;
-import ru.itmo.bank.offers.DepositOffer;
-import ru.itmo.tools.CalendarWeapon;
-import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
-import ru.itmo.tools.bankExceptions.ClientNotFoundException;
-import ru.itmo.tools.clientExceptions.IncorrectPassword;
-import ru.itmo.tools.clientExceptions.InvalidAddressException;
-import ru.itmo.tools.clientExceptions.InvalidClientNameException;
-import ru.itmo.tools.clientExceptions.InvalidPassportException;
-import ru.itmo.tools.uiExceptions.UnknownCommand;
+import ru.itmo.bank.offer.CreditOffer;
+import ru.itmo.bank.offer.DebitOffer;
+import ru.itmo.bank.offer.DepositOffer;
+import ru.itmo.tool.CalendarWeapon;
+import ru.itmo.tool.accountException.TransactionCannotBeMade;
+import ru.itmo.tool.bankException.ClientNotFoundException;
+import ru.itmo.tool.clientException.IncorrectPassword;
+import ru.itmo.tool.clientException.InvalidAddressException;
+import ru.itmo.tool.clientException.InvalidClientNameException;
+import ru.itmo.tool.clientException.InvalidPassportException;
+import ru.itmo.tool.uiException.UnknownCommand;
 
 public class UiAdapter {
 
