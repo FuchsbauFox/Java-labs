@@ -1,6 +1,6 @@
 package ru.itmo.bank.account;
 
-public enum LogTypes {
+public enum LOG_TYPES {
   TransactionWasCancel,
   Commission,
   TransferTo,

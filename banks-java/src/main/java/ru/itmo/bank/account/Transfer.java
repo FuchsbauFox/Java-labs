@@ -29,8 +29,8 @@ public class Transfer {
 
     senderAccount.checkWithdrawal(money);
     receiverAccount.checkReplenishment(money);
-    senderAccount.withdrawal(money, LogTypes.TransferTo, idReceiverAccount);
-    receiverAccount.replenishment(money, LogTypes.TransferFrom, idSenderAccount);
+    senderAccount.withdrawal(money, LOG_TYPES.TransferTo, idReceiverAccount);
+    receiverAccount.replenishment(money, LOG_TYPES.TransferFrom, idSenderAccount);
   }
 
   public void cancelTransfer(String idAccount, int idTransaction)
@@ -78,8 +78,8 @@ public class Transfer {
 
     receiverAccount.checkWithdrawal(log.getMoney());
     senderAccount.checkReplenishment(log.getMoney());
-    receiverAccount.withdrawal(log.getMoney(), LogTypes.CancelTransfer, "");
-    senderAccount.replenishment(log.getMoney(), LogTypes.CancelTransfer, "");
+    receiverAccount.withdrawal(log.getMoney(), LOG_TYPES.CancelTransfer, "");
+    senderAccount.replenishment(log.getMoney(), LOG_TYPES.CancelTransfer, "");
 
     if (commissionLog != null) {
       commissionLog.cancelTransaction();

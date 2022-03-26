@@ -3,11 +3,11 @@ package ru.itmo.bank.account;
 public class TransactionLog {
 
   private final int idTransaction;
-  private LogTypes type;
+  private LOG_TYPES type;
   private final float money;
   private String idAccount;
 
-  public TransactionLog(int idTransaction, LogTypes type, String idAccount, float money) {
+  public TransactionLog(int idTransaction, LOG_TYPES type, String idAccount, float money) {
     this.idTransaction = idTransaction;
     this.type = type;
     this.money = money;
@@ -27,6 +27,6 @@ public class TransactionLog {
   }
 
   public void cancelTransaction() {
-    type = LogTypes.TransactionWasCancel;
+    type = LOG_TYPES.TransactionWasCancel;
   }
 }

@@ -86,14 +86,14 @@ public class DepositAccount implements Account {
   }
 
   @Override
-  public void withdrawal(float money, LogTypes log, String idReceiverAccount) throws TransactionCannotBeMade {
+  public void withdrawal(float money, LOG_TYPES log, String idReceiverAccount) throws TransactionCannotBeMade {
     this.money -= state.withdrawal(money);
 
     transactions.add(new TransactionLog(idLastTransaction++, log, idReceiverAccount, money));
   }
 
   @Override
-  public void replenishment(float money, LogTypes log, String idSenderAccount) throws TransactionCannotBeMade {
+  public void replenishment(float money, LOG_TYPES log, String idSenderAccount) throws TransactionCannotBeMade {
     this.money += state.replenishment(money);
     transactions.add(new TransactionLog(idLastTransaction++, log, idSenderAccount, money));
   }

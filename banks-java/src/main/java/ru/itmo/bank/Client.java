@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import ru.itmo.bank.account.LogTypes;
+import ru.itmo.bank.account.LOG_TYPES;
 import ru.itmo.bank.account.Transfer;
 import ru.itmo.tool.accountException.AccountNotFoundException;
 import ru.itmo.tool.accountException.ErrorCancelTransaction;
@@ -65,7 +65,7 @@ public class Client {
     for (Account account :
         accounts) {
       if (Objects.equals(account.getIdAccount(), idMyAccount)) {
-        account.withdrawal(money, LogTypes.Withdrawal, "");
+        account.withdrawal(money, LOG_TYPES.Withdrawal, "");
         break;
       }
     }
@@ -77,7 +77,7 @@ public class Client {
     for (Account account :
         accounts) {
       if (Objects.equals(account.getIdAccount(), idMyAccount)) {
-        account.replenishment(money, LogTypes.Replenishment, "");
+        account.replenishment(money, LOG_TYPES.Replenishment, "");
         break;
       }
     }

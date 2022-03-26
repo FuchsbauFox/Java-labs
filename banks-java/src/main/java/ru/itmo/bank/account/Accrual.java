@@ -30,7 +30,7 @@ public class Accrual {
 
   public void NewDay() throws TransactionCannotBeMade {
     if (daysCounter == 30) {
-      account.replenishment(savings, LogTypes.Accrual, "");
+      account.replenishment(savings, LOG_TYPES.Accrual, "");
       daysCounter = 0;
       savings = 0;
     }

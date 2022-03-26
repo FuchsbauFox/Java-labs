@@ -74,13 +74,13 @@ public class CreditAccount implements Account {
   }
 
   @Override
-  public void withdrawal(float money, LogTypes log, String idReceiverAccount) throws TransactionCannotBeMade {
-    if (this.money - money < 0 && log == LogTypes.CancelTransfer) {
+  public void withdrawal(float money, LOG_TYPES log, String idReceiverAccount) throws TransactionCannotBeMade {
+    if (this.money - money < 0 && log == LOG_TYPES.CancelTransfer) {
       state.withdrawal(money - offer.getCommission(), true);
     } else {
       if (this.money - money < 0) {
         transactions.add(
-            new TransactionLog(idLastTransaction, LogTypes.Commission, "", offer.getCommission()));
+            new TransactionLog(idLastTransaction, LOG_TYPES.Commission, "", offer.getCommission()));
       }
       this.money -= state.withdrawal(money, false);
     }
@@ -89,13 +89,13 @@ public class CreditAccount implements Account {
   }
 
   @Override
-  public void replenishment(float money, LogTypes log, String idSenderAccount) throws TransactionCannotBeMade {
-    if (this.money < 0 && log == LogTypes.CancelTransfer) {
+  public void replenishment(float money, LOG_TYPES log, String idSenderAccount) throws TransactionCannotBeMade {
+    if (this.money < 0 && log == LOG_TYPES.CancelTransfer) {
       state.replenishment(money + offer.getCommission(), true);
     } else {
       if (this.money < 0) {
         transactions.add(
-            new TransactionLog(idLastTransaction, LogTypes.Commission, "", offer.getCommission()));
+            new TransactionLog(idLastTransaction, LOG_TYPES.Commission, "", offer.getCommission()));
       }
       this.money += state.replenishment(money, false);
     }

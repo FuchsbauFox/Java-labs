@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.itmo.bank.Bank;
@@ -49,12 +50,12 @@ public class BankTest {
     bank1 = CentralBank.getInstance().getBank("Сбербанк");
     bank2 = CentralBank.getInstance().getBank("Газпромбанк");
 
-    ArrayList<Float> from = new ArrayList<Float>();
+    List<Float> from = new ArrayList<Float>();
     from.add(0F);
     from.add(1000F);
     from.add(5000F);
     from.add(10000F);
-    ArrayList<Float> interest = new ArrayList<Float>();
+    List<Float> interest = new ArrayList<Float>();
     interest.add(4.5F);
     interest.add(5F);
     interest.add(6F);
