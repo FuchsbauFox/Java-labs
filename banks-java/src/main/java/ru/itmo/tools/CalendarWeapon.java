@@ -6,12 +6,12 @@ import ru.itmo.bank.CentralBank;
 import ru.itmo.tools.accountExceptions.IncorrectDateForDepositException;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
-public class MyCalendar {
+public class CalendarWeapon {
 
-  private static MyCalendar instance;
-  private Calendar calendar;
+  private static CalendarWeapon instance;
+  private final Calendar calendar;
 
-  private MyCalendar() {
+  private CalendarWeapon() {
     this.calendar = new GregorianCalendar();
   }
 
@@ -19,9 +19,9 @@ public class MyCalendar {
     return calendar;
   }
 
-  public static MyCalendar getInstance() {
+  public static CalendarWeapon getInstance() {
     if (instance == null) {
-      instance = new MyCalendar();
+      instance = new CalendarWeapon();
     }
     return instance;
   }

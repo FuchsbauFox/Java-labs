@@ -2,14 +2,16 @@ package ru.itmo.bank.accounts;
 
 public class TransactionLog {
 
-  private int idTransaction;
-  private String type;
-  private float money;
+  private final int idTransaction;
+  private LogTypes type;
+  private final float money;
+  private String idAccount;
 
-  public TransactionLog(int idTransaction, String type, float money) {
+  public TransactionLog(int idTransaction, LogTypes type, String idAccount, float money) {
     this.idTransaction = idTransaction;
     this.type = type;
     this.money = money;
+    this.idAccount = idAccount;
   }
 
   public int getIdTransaction() {
@@ -17,7 +19,7 @@ public class TransactionLog {
   }
 
   public String getType() {
-    return type;
+    return type.toString() + idAccount;
   }
 
   public float getMoney() {
@@ -25,6 +27,6 @@ public class TransactionLog {
   }
 
   public void cancelTransaction() {
-    type = "Transaction was cancel";
+    type = LogTypes.TransactionWasCancel;
   }
 }

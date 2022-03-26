@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import ru.itmo.bank.accounts.LogTypes;
 import ru.itmo.bank.accounts.Transfer;
 import ru.itmo.tools.accountExceptions.AccountNotFoundException;
 import ru.itmo.tools.accountExceptions.ErrorCancelTransaction;
@@ -16,7 +17,7 @@ import ru.itmo.tools.clientExceptions.InvalidPassportException;
 
 public class Client {
 
-  private List<Account> accounts;
+  private final List<Account> accounts;
   private String password;
   private List<String> notifications;
   private String fullName;
@@ -25,9 +26,9 @@ public class Client {
   private String phoneNumber;
 
   public Client() {
-    accounts = new ArrayList<Account>();
+    accounts = new ArrayList<>();
     password = null;
-    notifications = new ArrayList<String>();
+    notifications = new ArrayList<>();
     fullName = null;
     passport = null;
     address = null;
@@ -64,7 +65,7 @@ public class Client {
     for (Account account :
         accounts) {
       if (Objects.equals(account.getIdAccount(), idMyAccount)) {
-        account.withdrawal(money, "Withdrawal");
+        account.withdrawal(money, LogTypes.Withdrawal, "");
         break;
       }
     }
@@ -76,7 +77,7 @@ public class Client {
     for (Account account :
         accounts) {
       if (Objects.equals(account.getIdAccount(), idMyAccount)) {
-        account.replenishment(money, "Replenishment");
+        account.replenishment(money, LogTypes.Replenishment, "");
         break;
       }
     }
@@ -179,7 +180,7 @@ public class Client {
   }
 
   public void clearNotifications() {
-    notifications = new ArrayList<String>();
+    notifications = new ArrayList<>();
   }
 
   public void login(String password) throws IncorrectPassword {

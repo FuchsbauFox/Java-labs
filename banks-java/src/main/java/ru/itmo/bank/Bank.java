@@ -19,10 +19,10 @@ import ru.itmo.tools.clientExceptions.IncorrectPassword;
 public class Bank {
 
   public int bankId;
-  private List<Offer> offers;
-  private List<Client> clients;
-  private List<Client> observers;
-  private String name;
+  private final List<Offer> offers;
+  private final List<Client> clients;
+  private final List<Client> observers;
+  private final String name;
   private int idLastAccount;
 
   public Bank(String name, int id) throws InvalidBankNameException {
@@ -33,9 +33,9 @@ public class Bank {
     this.name = name;
     this.bankId = id;
     this.idLastAccount = 0;
-    this.offers = new ArrayList<Offer>();
-    this.clients = new ArrayList<Client>();
-    this.observers = new ArrayList<Client>();
+    this.offers = new ArrayList<>();
+    this.clients = new ArrayList<>();
+    this.observers = new ArrayList<>();
   }
 
   public String getName() {
@@ -167,7 +167,6 @@ public class Bank {
       return;
     }
 
-    boolean flag = true;
     for (Client thisClient :
         clients) {
       if (thisClient == client) {

@@ -15,16 +15,16 @@ import ru.itmo.tools.accountExceptions.NegativeOrNilLimitDoubtfulAccountExceptio
 
 public class DepositOffer implements Offer {
 
-  private List<ItemInterest> interests;
-  private float limitDoubtfulAccount;
-  private Behavior behavior;
+  private final List<ItemInterest> interests;
+  private final float limitDoubtfulAccount;
+  private final Behavior behavior;
 
-  public DepositOffer(ArrayList<Float> from, List<Float> interest, float limitDoubtfulAccount)
+  public DepositOffer(List<Float> from, List<Float> interest, float limitDoubtfulAccount)
       throws ListsMustNotDecrease, FirstLimitDoesntStartAtZeroException, ArgumentNullException, ListsDontFitTogetherException, NegativeOrNilInterestException, NegativeOrNilLimitDoubtfulAccountException {
     CheckListInterests(from, interest);
     CheckLimitDoubtfulAccount(limitDoubtfulAccount);
 
-    interests = new ArrayList<ItemInterest>();
+    interests = new ArrayList<>();
     for (int i = 0; i < from.size(); i++) {
       interests.add(new ItemInterest(from.get(i), interest.get(i)));
     }
@@ -34,7 +34,7 @@ public class DepositOffer implements Offer {
   }
 
   public DepositOffer(DepositOffer depositOffer) {
-    this.interests = new ArrayList<ItemInterest>(depositOffer.getInterests());
+    this.interests = new ArrayList<>(depositOffer.getInterests());
     this.limitDoubtfulAccount = depositOffer.getLimitDoubtfulAccount();
     this.behavior = depositOffer.getBehavior();
   }
@@ -47,6 +47,7 @@ public class DepositOffer implements Offer {
     return limitDoubtfulAccount;
   }
 
+  @Override
   public Behavior getBehavior() {
     return behavior;
   }

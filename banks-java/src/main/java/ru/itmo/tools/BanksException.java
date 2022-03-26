@@ -1,6 +1,6 @@
 package ru.itmo.tools;
 
-public class BanksException extends Exception {
+public class BanksException extends RuntimeException {
 
   public BanksException() {
   }

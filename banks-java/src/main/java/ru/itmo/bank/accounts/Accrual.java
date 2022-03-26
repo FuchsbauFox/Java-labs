@@ -8,14 +8,14 @@ import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
 public class Accrual {
 
-  private Account account;
-  private List<ItemInterest> interests;
+  private final Account account;
+  private final List<ItemInterest> interests;
   private int daysCounter;
   private float savings;
 
   public Accrual(Account account, List<ItemInterest> interests) {
     this.account = account;
-    this.interests = new ArrayList<ItemInterest>(interests);
+    this.interests = new ArrayList<>(interests);
     this.daysCounter = 0;
     this.savings = 0;
   }
@@ -30,7 +30,7 @@ public class Accrual {
 
   public void NewDay() throws TransactionCannotBeMade {
     if (daysCounter == 30) {
-      account.replenishment(savings, "Accrual");
+      account.replenishment(savings, LogTypes.Accrual, "");
       daysCounter = 0;
       savings = 0;
     }

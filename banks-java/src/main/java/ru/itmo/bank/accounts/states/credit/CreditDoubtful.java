@@ -1,17 +1,22 @@
-package ru.itmo.bank.accounts.states.CreditStates;
+package ru.itmo.bank.accounts.states.credit;
 
 import ru.itmo.bank.accounts.states.CreditState;
 import ru.itmo.bank.offers.CreditOffer;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
-public class CreditStandard extends CreditState {
+public class CreditDoubtful extends CreditState {
 
   @Override
   public void checkWithdrawal(float money, boolean withoutCommission)
       throws TransactionCannotBeMade {
     CreditOffer offer = (CreditOffer) account.getOffer();
-    if (account.getMoney() - money < 0 && !withoutCommission) {
-      money += offer.getCommission();
+    if (!withoutCommission) {
+      if (offer.getLimitDoubtfulAccount() < money) {
+        throw new TransactionCannotBeMade();
+      }
+      if (account.getMoney() - money < 0) {
+        money += offer.getCommission();
+      }
     }
 
     if (offer.getLimit() < -1 * (account.getMoney() - money) || money < 0) {
@@ -23,8 +28,14 @@ public class CreditStandard extends CreditState {
   public void checkReplenishment(float money, boolean withoutCommission)
       throws TransactionCannotBeMade {
     CreditOffer offer = (CreditOffer) account.getOffer();
-    if (account.getMoney() < 0 && !withoutCommission) {
-      money -= offer.getCommission();
+    if (!withoutCommission) {
+      if (offer.getLimitDoubtfulAccount() < money) {
+        throw new TransactionCannotBeMade();
+      }
+
+      if (account.getMoney() < 0) {
+        money -= offer.getCommission();
+      }
     }
 
     if (money < 0) {

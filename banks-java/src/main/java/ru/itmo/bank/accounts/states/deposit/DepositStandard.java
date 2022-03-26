@@ -1,13 +1,16 @@
-package ru.itmo.bank.accounts.states.DebitStates;
+package ru.itmo.bank.accounts.states.deposit;
 
-import ru.itmo.bank.accounts.states.DebitState;
+import ru.itmo.bank.accounts.states.DepositState;
+import ru.itmo.tools.CalendarWeapon;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
-public class DebitStandard extends DebitState {
+public class DepositStandard extends DepositState {
 
   @Override
   public void checkWithdrawal(float money) throws TransactionCannotBeMade {
-    if (account.getMoney() - money < 0 || money < 0) {
+    if (CalendarWeapon.getInstance()
+        .CheckDate(account.getDepositEndDate(), CalendarWeapon.getInstance().getCalendar())
+        || money < 0) {
       throw new TransactionCannotBeMade();
     }
   }

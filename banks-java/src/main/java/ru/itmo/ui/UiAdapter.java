@@ -15,7 +15,7 @@ import ru.itmo.bank.builder.ClientDirector;
 import ru.itmo.bank.offers.CreditOffer;
 import ru.itmo.bank.offers.DebitOffer;
 import ru.itmo.bank.offers.DepositOffer;
-import ru.itmo.tools.MyCalendar;
+import ru.itmo.tools.CalendarWeapon;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 import ru.itmo.tools.bankExceptions.ClientNotFoundException;
 import ru.itmo.tools.clientExceptions.IncorrectPassword;
@@ -60,15 +60,15 @@ public class UiAdapter {
   }
 
   public void skipDay() throws TransactionCannotBeMade {
-    MyCalendar.getInstance().skipDay();
+    CalendarWeapon.getInstance().skipDay();
   }
 
   public void skipMonth() throws TransactionCannotBeMade {
-    MyCalendar.getInstance().skipMonth();
+    CalendarWeapon.getInstance().skipMonth();
   }
 
   public void skipYear() throws TransactionCannotBeMade {
-    MyCalendar.getInstance().skipYear();
+    CalendarWeapon.getInstance().skipYear();
   }
 
   public void showClients(Bank bank) {
@@ -109,7 +109,7 @@ public class UiAdapter {
       }
 
       if (offer instanceof DepositOffer) {
-        System.out.println("Current date: " + MyCalendar.getInstance().getCalendar());
+        System.out.println("Current date: " + CalendarWeapon.getInstance().getCalendar());
         System.out.println("Number of months for which the deposit is provided: ");
         numberOfMonths = in.nextInt();
       }

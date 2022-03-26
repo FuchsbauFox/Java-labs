@@ -10,13 +10,10 @@ import ru.itmo.tools.accountExceptions.NegativeOrNilLimitException;
 
 public class CreditOffer implements Offer {
 
-  private float commission;
-  private float limit;
-  private float limitDoubtfulAccount;
-  private Behavior behavior;
-
-  public CreditOffer() {
-  }
+  private final float commission;
+  private final float limit;
+  private final float limitDoubtfulAccount;
+  private final Behavior behavior;
 
   public CreditOffer(float commission, float limit, float limitDoubtfulAccount)
       throws NegativeOrNilCommissionException, CommissionMoreThanLimitDoubtfulAccountException, NegativeOrNilLimitException, NegativeOrNilLimitDoubtfulAccountException {
@@ -49,6 +46,7 @@ public class CreditOffer implements Offer {
     return limitDoubtfulAccount;
   }
 
+  @Override
   public Behavior getBehavior() {
     return behavior;
   }

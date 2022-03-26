@@ -7,30 +7,30 @@ import java.util.List;
 import ru.itmo.bank.Account;
 import ru.itmo.bank.Offer;
 import ru.itmo.bank.accounts.states.DepositState;
-import ru.itmo.bank.accounts.states.DepositStates.DepositBlocked;
-import ru.itmo.bank.accounts.states.DepositStates.DepositStandard;
+import ru.itmo.bank.accounts.states.deposit.DepositBlocked;
+import ru.itmo.bank.accounts.states.deposit.DepositStandard;
 import ru.itmo.bank.offers.DepositOffer;
-import ru.itmo.tools.MyCalendar;
+import ru.itmo.tools.CalendarWeapon;
 import ru.itmo.tools.accountExceptions.IncorrectDateForDepositException;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
 public class DepositAccount implements Account {
 
-  private List<TransactionLog> transactions;
-  private Accrual accrual;
+  private final List<TransactionLog> transactions;
+  private final Accrual accrual;
   private DepositState state;
   private int idLastTransaction;
   private float money;
-  private DepositOffer offer;
-  private String idAccount;
-  private Calendar depositEndDate;
-  private Calendar openDate;
+  private final DepositOffer offer;
+  private final String idAccount;
+  private final Calendar depositEndDate;
+  private final Calendar openDate;
 
   public DepositAccount(DepositOffer offer, String id, Calendar depositEndDate)
       throws IncorrectDateForDepositException {
-    MyCalendar.getInstance().CheckDate(depositEndDate);
+    CalendarWeapon.getInstance().CheckDate(depositEndDate);
 
-    this.transactions = new ArrayList<TransactionLog>();
+    this.transactions = new ArrayList<>();
     this.accrual = new Accrual(this, offer.getInterests());
     this.state = null;
     this.idLastTransaction = 0;
@@ -38,21 +38,25 @@ public class DepositAccount implements Account {
     this.offer = offer;
     this.idAccount = id;
     this.depositEndDate = depositEndDate;
-    this.openDate = MyCalendar.getInstance().getCalendar();
+    this.openDate = CalendarWeapon.getInstance().getCalendar();
   }
 
+  @Override
   public float getMoney() {
     return money;
   }
 
+  @Override
   public Offer getOffer() {
     return offer;
   }
 
+  @Override
   public String getIdAccount() {
     return idAccount;
   }
 
+  @Override
   public List<TransactionLog> getTransactions() {
     return Collections.unmodifiableList(transactions);
   }
@@ -61,43 +65,51 @@ public class DepositAccount implements Account {
     return depositEndDate;
   }
 
+  @Override
   public Calendar getOpenDate() {
     return openDate;
   }
 
-  public void TransitionTo(DepositState state) {
+  public void transitionTo(DepositState state) {
     this.state = state;
     this.state.SetContext(this);
   }
 
+  @Override
   public void checkWithdrawal(float money) throws TransactionCannotBeMade {
     state.checkWithdrawal(money);
   }
 
+  @Override
   public void checkReplenishment(float money) throws TransactionCannotBeMade {
     state.checkReplenishment(money);
   }
 
-  public void withdrawal(float money, String log) throws TransactionCannotBeMade {
+  @Override
+  public void withdrawal(float money, LogTypes log, String idReceiverAccount) throws TransactionCannotBeMade {
     this.money -= state.withdrawal(money);
 
-    transactions.add(new TransactionLog(idLastTransaction++, log, money));
+    transactions.add(new TransactionLog(idLastTransaction++, log, idReceiverAccount, money));
   }
 
-  public void replenishment(float money, String log) throws TransactionCannotBeMade {
+  @Override
+  public void replenishment(float money, LogTypes log, String idSenderAccount) throws TransactionCannotBeMade {
     this.money += state.replenishment(money);
-    transactions.add(new TransactionLog(idLastTransaction++, log, money));
+    transactions.add(new TransactionLog(idLastTransaction++, log, idSenderAccount, money));
   }
 
+  @Override
   public void accrualOfInterest() throws TransactionCannotBeMade {
     accrual.NewDay();
   }
 
+  @Override
   public void block() {
-    TransitionTo(new DepositBlocked());
+    transitionTo(new DepositBlocked());
   }
 
+  @Override
   public void standard() {
-    TransitionTo(new DepositStandard());
+    transitionTo(new DepositStandard());
   }
 }

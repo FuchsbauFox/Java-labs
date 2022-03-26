@@ -1,4 +1,4 @@
-package ru.itmo.bank.accounts.states.CreditStates;
+package ru.itmo.bank.accounts.states.credit;
 
 import ru.itmo.bank.accounts.states.CreditState;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;

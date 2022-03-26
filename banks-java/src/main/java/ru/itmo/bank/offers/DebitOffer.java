@@ -8,9 +8,9 @@ import ru.itmo.tools.accountExceptions.NegativeOrNilLimitDoubtfulAccountExceptio
 
 public class DebitOffer implements Offer {
 
-  private float interestOnBalance;
-  private float limitDoubtfulAccount;
-  private Behavior behavior;
+  private final float interestOnBalance;
+  private final float limitDoubtfulAccount;
+  private final Behavior behavior;
 
   public DebitOffer(float interestOnBalance, float limitDoubtfulAccount)
       throws NegativeOrNilInterestException, NegativeOrNilLimitDoubtfulAccountException {
@@ -36,6 +36,7 @@ public class DebitOffer implements Offer {
     return limitDoubtfulAccount;
   }
 
+  @Override
   public Behavior getBehavior() {
     return behavior;
   }

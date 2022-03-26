@@ -12,11 +12,11 @@ import ru.itmo.tools.bankExceptions.InvalidBankNameException;
 public class CentralBank {
 
   private static CentralBank instance;
-  private List<Bank> banks;
+  private final List<Bank> banks;
   private int idLastBank;
 
   private CentralBank() {
-    banks = new ArrayList<Bank>();
+    banks = new ArrayList<>();
     idLastBank = 0;
   }
 

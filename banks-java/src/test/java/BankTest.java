@@ -39,7 +39,6 @@ public class BankTest {
   private Bank bank2;
   private Client client1;
   private Client client2;
-  private Client client3;
 
   @BeforeEach
   public void setUp()
@@ -75,8 +74,6 @@ public class BankTest {
     client1 = builder.getClient();
     director.buildClient("Цу Вацу", "456", "12 12 121212", "asfe", "71234567891");
     client2 = builder.getClient();
-    director.buildClient("Ми Вацу", "789", "12 12 121212", "asfe", "71234567891");
-    client3 = builder.getClient();
   }
 
   @Test

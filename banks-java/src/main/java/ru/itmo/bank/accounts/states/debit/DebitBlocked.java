@@ -1,9 +1,9 @@
-package ru.itmo.bank.accounts.states.DepositStates;
+package ru.itmo.bank.accounts.states.debit;
 
-import ru.itmo.bank.accounts.states.DepositState;
+import ru.itmo.bank.accounts.states.DebitState;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
-public class DepositBlocked extends DepositState {
+public class DebitBlocked extends DebitState {
 
   @Override
   public void checkWithdrawal(float money) throws TransactionCannotBeMade {

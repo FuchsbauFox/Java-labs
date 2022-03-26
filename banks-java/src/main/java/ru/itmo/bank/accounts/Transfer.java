@@ -29,8 +29,8 @@ public class Transfer {
 
     senderAccount.checkWithdrawal(money);
     receiverAccount.checkReplenishment(money);
-    senderAccount.withdrawal(money, "TransferTo: " + idReceiverAccount);
-    receiverAccount.replenishment(money, "TransferFrom: " + idSenderAccount);
+    senderAccount.withdrawal(money, LogTypes.TransferTo, idReceiverAccount);
+    receiverAccount.replenishment(money, LogTypes.TransferFrom, idSenderAccount);
   }
 
   public void cancelTransfer(String idAccount, int idTransaction)
@@ -51,7 +51,7 @@ public class Transfer {
     for (var transaction :
         senderAccount.getTransactions()) {
       if (transaction.getIdTransaction() == idTransaction &&
-          transaction.getType().matches("^TransferTo: [0-9]\\d{8}")) {
+          transaction.getType().matches("^TransferTo[0-9]\\d{8}")) {
         log = transaction;
         break;
       }
@@ -66,7 +66,7 @@ public class Transfer {
     for (var transaction :
         receiverAccount.getTransactions()) {
       if (Math.abs(transaction.getMoney() - log.getMoney()) < 0.001 && Objects.equals(
-          transaction.getType(), "TransferFrom: " + idAccount)) {
+          transaction.getType(), "TransferFrom" + idAccount)) {
         logReceiver = transaction;
         break;
       }
@@ -78,8 +78,8 @@ public class Transfer {
 
     receiverAccount.checkWithdrawal(log.getMoney());
     senderAccount.checkReplenishment(log.getMoney());
-    receiverAccount.withdrawal(log.getMoney(), "CancelTransfer: " + logReceiver.getIdTransaction());
-    senderAccount.replenishment(log.getMoney(), "CancelTransfer: " + idTransaction);
+    receiverAccount.withdrawal(log.getMoney(), LogTypes.CancelTransfer, "");
+    senderAccount.replenishment(log.getMoney(), LogTypes.CancelTransfer, "");
 
     if (commissionLog != null) {
       commissionLog.cancelTransaction();

@@ -1,23 +1,26 @@
-package ru.itmo.bank.accounts.states.DepositStates;
+package ru.itmo.bank.accounts.states.deposit;
 
 import ru.itmo.bank.accounts.states.DepositState;
-import ru.itmo.tools.MyCalendar;
+import ru.itmo.bank.offers.DepositOffer;
+import ru.itmo.tools.CalendarWeapon;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
-public class DepositStandard extends DepositState {
+public class DepositDoubtful extends DepositState {
 
   @Override
   public void checkWithdrawal(float money) throws TransactionCannotBeMade {
-    if (MyCalendar.getInstance()
-        .CheckDate(account.getDepositEndDate(), MyCalendar.getInstance().getCalendar())
-        || money < 0) {
+    DepositOffer offer = (DepositOffer) account.getOffer();
+    if (offer.getLimitDoubtfulAccount() < money || CalendarWeapon.getInstance()
+        .CheckDate(account.getDepositEndDate(), CalendarWeapon.getInstance().getCalendar()) ||
+        money < 0) {
       throw new TransactionCannotBeMade();
     }
   }
 
   @Override
   public void checkReplenishment(float money) throws TransactionCannotBeMade {
-    if (money < 0) {
+    DepositOffer offer = (DepositOffer) account.getOffer();
+    if (offer.getLimitDoubtfulAccount() < money || money < 0) {
       throw new TransactionCannotBeMade();
     }
   }

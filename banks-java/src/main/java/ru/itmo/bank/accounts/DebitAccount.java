@@ -7,27 +7,27 @@ import java.util.List;
 import ru.itmo.bank.Account;
 import ru.itmo.bank.Offer;
 import ru.itmo.bank.accounts.states.DebitState;
-import ru.itmo.bank.accounts.states.DebitStates.DebitBlocked;
-import ru.itmo.bank.accounts.states.DebitStates.DebitStandard;
+import ru.itmo.bank.accounts.states.debit.DebitBlocked;
+import ru.itmo.bank.accounts.states.debit.DebitStandard;
 import ru.itmo.bank.offers.DebitOffer;
 import ru.itmo.bank.offers.ItemInterest;
-import ru.itmo.tools.MyCalendar;
+import ru.itmo.tools.CalendarWeapon;
 import ru.itmo.tools.accountExceptions.TransactionCannotBeMade;
 
 public class DebitAccount implements Account {
 
-  private List<TransactionLog> transactions;
-  private Accrual accrual;
+  private final List<TransactionLog> transactions;
+  private final Accrual accrual;
   private DebitState state;
   private int idLastTransaction;
   private float money;
-  private DebitOffer offer;
-  private String idAccount;
-  private Calendar openDate;
+  private final DebitOffer offer;
+  private final String idAccount;
+  private final Calendar openDate;
 
   public DebitAccount(DebitOffer offer, String id) {
-    this.transactions = new ArrayList<TransactionLog>();
-    ArrayList<ItemInterest> item = new ArrayList<ItemInterest>();
+    this.transactions = new ArrayList<>();
+    ArrayList<ItemInterest> item = new ArrayList<>();
     item.add(new ItemInterest(0, offer.getInterestOnBalance()));
     this.accrual = new Accrual(this, item);
     this.state = null;
@@ -35,17 +35,20 @@ public class DebitAccount implements Account {
     this.money = 0;
     this.offer = offer;
     this.idAccount = id;
-    this.openDate = MyCalendar.getInstance().getCalendar();
+    this.openDate = CalendarWeapon.getInstance().getCalendar();
   }
 
+  @Override
   public float getMoney() {
     return money;
   }
 
+  @Override
   public Offer getOffer() {
     return offer;
   }
 
+  @Override
   public String getIdAccount() {
     return idAccount;
   }
@@ -54,43 +57,50 @@ public class DebitAccount implements Account {
     return Collections.unmodifiableList(transactions);
   }
 
+  @Override
   public Calendar getOpenDate() {
     return openDate;
   }
 
-  public void TransitionTo(DebitState state) {
+  public void transitionTo(DebitState state) {
     this.state = state;
     this.state.SetContext(this);
   }
 
+  @Override
   public void checkWithdrawal(float money) throws TransactionCannotBeMade {
     state.checkWithdrawal(money);
   }
 
+  @Override
   public void checkReplenishment(float money) throws TransactionCannotBeMade {
     state.checkReplenishment(money);
   }
 
-  public void withdrawal(float money, String log) throws TransactionCannotBeMade {
+  @Override
+  public void withdrawal(float money, LogTypes log, String idReceiverAccount) throws TransactionCannotBeMade {
     this.money -= state.withdrawal(money);
-
-    transactions.add(new TransactionLog(idLastTransaction++, log, money));
+    transactions.add(new TransactionLog(idLastTransaction++, log, idReceiverAccount, money));
   }
 
-  public void replenishment(float money, String log) throws TransactionCannotBeMade {
+  @Override
+  public void replenishment(float money, LogTypes log, String idSenderAccount) throws TransactionCannotBeMade {
     this.money += state.replenishment(money);
-    transactions.add(new TransactionLog(idLastTransaction++, log, money));
+    transactions.add(new TransactionLog(idLastTransaction++, log, idSenderAccount, money));
   }
 
+  @Override
   public void accrualOfInterest() throws TransactionCannotBeMade {
     accrual.NewDay();
   }
 
+  @Override
   public void block() {
-    TransitionTo(new DebitBlocked());
+    transitionTo(new DebitBlocked());
   }
 
+  @Override
   public void standard() {
-    TransitionTo(new DebitStandard());
+    transitionTo(new DebitStandard());
   }
 }

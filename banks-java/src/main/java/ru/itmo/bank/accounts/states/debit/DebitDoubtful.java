@@ -1,4 +1,4 @@
-package ru.itmo.bank.accounts.states.DebitStates;
+package ru.itmo.bank.accounts.states.debit;
 
 import ru.itmo.bank.accounts.states.DebitState;
 import ru.itmo.bank.offers.DebitOffer;
