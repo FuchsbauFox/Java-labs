@@ -1,6 +1,6 @@
 import static org.mockito.Mockito.mock;
 
-import accessory.COLOR;
+import accessory.color;
 import inter.CatService;
 import inter.OwnerService;
 import java.util.Calendar;
@@ -39,9 +39,9 @@ public class CatsTest {
   public void AddOwnerAndCat() {
     Owner owner = new Owner("Vova", new GregorianCalendar(2002, Calendar.JUNE, 7).getTime());
     Cat cat1 = new Cat("Lisa", new GregorianCalendar(2011, Calendar.MAY, 10).getTime(),
-        "European Shorthair", COLOR.RedTabby);
+        "European Shorthair", color.REDTABBY);
     Cat cat2 = new Cat("Jula", new GregorianCalendar(2007, Calendar.MAY, 10).getTime(),
-        "European Shorthair", COLOR.RedTabby);
+        "European Shorthair", color.REDTABBY);
 
     owner.addCat(cat1);
     owner.addCat(cat2);

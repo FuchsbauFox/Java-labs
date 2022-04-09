@@ -1,6 +1,5 @@
 package model;
 
-import accessory.COLOR;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,13 +33,13 @@ public class Cat {
 
   @Column(name = "color")
   @Enumerated(EnumType.STRING)
-  private COLOR color;
+  private accessory.color color;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owner_id")
   private Owner owner;
 
-  public Cat(String name, Date dateOfBirth, String breed, COLOR color) {
+  public Cat(String name, Date dateOfBirth, String breed, accessory.color color) {
     this.name = name;
     this.dateOfBirth = dateOfBirth;
     this.breed = breed;
@@ -79,11 +78,11 @@ public class Cat {
     this.breed = breed;
   }
 
-  public COLOR getColor() {
+  public accessory.color getColor() {
     return color;
   }
 
-  public void setColor(COLOR color) {
+  public void setColor(accessory.color color) {
     this.color = color;
   }
 
