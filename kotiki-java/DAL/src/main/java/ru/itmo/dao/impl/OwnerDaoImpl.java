@@ -1,10 +1,10 @@
-package dao;
+package ru.itmo.dao.impl;
 
-import inter.OwnerDao;
-import model.Owner;
+import ru.itmo.dao.OwnerDao;
+import ru.itmo.model.Owner;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import util.HibernateSessionFactory;
+import ru.itmo.util.HibernateSessionFactory;
 
 public class OwnerDaoImpl implements OwnerDao {
 

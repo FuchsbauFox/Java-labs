@@ -1,6 +1,6 @@
-package inter;
+package ru.itmo.service;
 
-import model.Owner;
+import ru.itmo.model.Owner;
 
 public interface OwnerService {
 

@@ -1,6 +1,6 @@
-package inter;
+package ru.itmo.dao;
 
-import model.Cat;
+import ru.itmo.model.Cat;
 
 public interface CatDao {
 

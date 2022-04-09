@@ -8,14 +8,14 @@
   <artifactId>kotiki-java</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+
   <modules>
     <module>BLL</module>
     <module>DAL</module>
   </modules>
+
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
-
-
 </project>

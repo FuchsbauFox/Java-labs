@@ -1,12 +1,14 @@
+package ru.itmo.test;
+
 import static org.mockito.Mockito.mock;
 
-import accessory.color;
-import inter.CatService;
-import inter.OwnerService;
+import ru.itmo.accessory.Color;
+import ru.itmo.service.CatService;
+import ru.itmo.service.OwnerService;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import model.Cat;
-import model.Owner;
+import ru.itmo.model.Cat;
+import ru.itmo.model.Owner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoSession;
 import org.testng.annotations.AfterMethod;
-import service.CatServiceImpl;
-import service.OwnerServiceImpl;
+import ru.itmo.service.impl.CatServiceImpl;
+import ru.itmo.service.impl.OwnerServiceImpl;
 
 public class CatsTest {
 
@@ -27,7 +29,7 @@ public class CatsTest {
   static MockitoSession session;
 
   @BeforeEach
-  public void Before() {
+  public void beforeMethod() {
     session = Mockito.mockitoSession()
         .initMocks(this)
         .startMocking();
@@ -36,12 +38,12 @@ public class CatsTest {
   }
 
   @Test
-  public void AddOwnerAndCat() {
+  public void addOwnerAndCatMethod() {
     Owner owner = new Owner("Vova", new GregorianCalendar(2002, Calendar.JUNE, 7).getTime());
     Cat cat1 = new Cat("Lisa", new GregorianCalendar(2011, Calendar.MAY, 10).getTime(),
-        "European Shorthair", color.RED_TABBY);
+        "European Shorthair", Color.RED_TABBY);
     Cat cat2 = new Cat("Jula", new GregorianCalendar(2007, Calendar.MAY, 10).getTime(),
-        "European Shorthair", color.RED_TABBY);
+        "European Shorthair", Color.RED_TABBY);
 
     owner.addCat(cat1);
     owner.addCat(cat2);

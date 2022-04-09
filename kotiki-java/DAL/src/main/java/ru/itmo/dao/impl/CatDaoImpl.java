@@ -1,10 +1,10 @@
-package dao;
+package ru.itmo.dao.impl;
 
-import inter.CatDao;
-import model.Cat;
+import ru.itmo.dao.CatDao;
+import ru.itmo.model.Cat;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import util.HibernateSessionFactory;
+import ru.itmo.util.HibernateSessionFactory;
 
 public class CatDaoImpl implements CatDao {
 

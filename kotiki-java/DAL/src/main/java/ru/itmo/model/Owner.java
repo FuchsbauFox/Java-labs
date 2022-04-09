@@ -1,4 +1,4 @@
-package model;
+package ru.itmo.model;
 
 import java.util.ArrayList;
 import java.util.Date;

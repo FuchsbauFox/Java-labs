@@ -1,9 +1,9 @@
-package service;
+package ru.itmo.service.impl;
 
-import dao.OwnerDaoImpl;
-import inter.OwnerDao;
-import inter.OwnerService;
-import model.Owner;
+import ru.itmo.dao.impl.OwnerDaoImpl;
+import ru.itmo.dao.OwnerDao;
+import ru.itmo.model.Owner;
+import ru.itmo.service.OwnerService;
 
 public class OwnerServiceImpl implements OwnerService {
 

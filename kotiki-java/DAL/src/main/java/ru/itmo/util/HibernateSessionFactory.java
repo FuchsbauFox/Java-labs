@@ -1,7 +1,7 @@
-package util;
+package ru.itmo.util;
 
-import model.Cat;
-import model.Owner;
+import ru.itmo.model.Cat;
+import ru.itmo.model.Owner;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

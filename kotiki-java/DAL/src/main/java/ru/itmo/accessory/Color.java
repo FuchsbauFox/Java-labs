@@ -1,6 +1,6 @@
-package accessory;
+package ru.itmo.accessory;
 
-public enum color {
+public enum Color {
   MACKEREL_TABBY,
   CLASSIC_TABBY,
   SPOTTED_TABBY,

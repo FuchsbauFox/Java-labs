@@ -1,9 +1,9 @@
-package service;
+package ru.itmo.service.impl;
 
-import dao.CatDaoImpl;
-import inter.CatDao;
-import inter.CatService;
-import model.Cat;
+import ru.itmo.dao.impl.CatDaoImpl;
+import ru.itmo.dao.CatDao;
+import ru.itmo.model.Cat;
+import ru.itmo.service.CatService;
 
 public class CatServiceImpl implements CatService {
 
