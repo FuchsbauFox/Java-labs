@@ -39,9 +39,9 @@ public class CatsTest {
   public void AddOwnerAndCat() {
     Owner owner = new Owner("Vova", new GregorianCalendar(2002, Calendar.JUNE, 7).getTime());
     Cat cat1 = new Cat("Lisa", new GregorianCalendar(2011, Calendar.MAY, 10).getTime(),
-        "European Shorthair", color.REDTABBY);
+        "European Shorthair", color.RED_TABBY);
     Cat cat2 = new Cat("Jula", new GregorianCalendar(2007, Calendar.MAY, 10).getTime(),
-        "European Shorthair", color.REDTABBY);
+        "European Shorthair", color.RED_TABBY);
 
     owner.addCat(cat1);
     owner.addCat(cat2);
