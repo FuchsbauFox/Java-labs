@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>kotiki-java</artifactId>
+    <groupId>org.itmo.kotiki</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>business-logic-layer</artifactId>
+
+  <properties>
+    <data-access-layer.version>1.0-SNAPSHOT</data-access-layer.version>
+    <mockito-core.version>4.3.1</mockito-core.version>
+    <junit.version>4.13.2</junit.version>
+    <junit-jupiter.version>5.8.2</junit-jupiter.version>
+    <testng.version>7.5</testng.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.itmo.kotiki</groupId>
+      <artifactId>data-access-layer</artifactId>
+      <version>${data-access-layer.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>${testng.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
