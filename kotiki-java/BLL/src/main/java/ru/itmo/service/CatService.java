@@ -1,10 +1,13 @@
 package ru.itmo.service;
 
-import ru.itmo.model.Cat;
+import java.util.List;
+import ru.itmo.entity.Cat;
 
 public interface CatService {
 
-  Cat findCat(int id);
+  List<Cat> getCats();
+
+  Cat getCat(int id);
 
   void saveCat(Cat cat);
 

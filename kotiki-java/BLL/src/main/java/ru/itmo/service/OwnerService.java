@@ -1,10 +1,13 @@
 package ru.itmo.service;
 
-import ru.itmo.model.Owner;
+import java.util.List;
+import ru.itmo.entity.Owner;
 
 public interface OwnerService {
 
-  Owner findOwner(int id);
+  List<Owner> getOwners();
+
+  Owner getOwner(int id);
 
   void saveOwner(Owner owner);
 

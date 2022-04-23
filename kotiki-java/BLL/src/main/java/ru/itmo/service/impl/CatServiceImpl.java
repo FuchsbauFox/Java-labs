@@ -1,30 +1,67 @@
 package ru.itmo.service.impl;
 
-import ru.itmo.dao.impl.CatDaoImpl;
-import ru.itmo.dao.CatDao;
-import ru.itmo.model.Cat;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+import ru.itmo.entity.Cat;
+import ru.itmo.entity.impl.CatImpl;
+import ru.itmo.model.CatDb;
+import ru.itmo.repository.CatRepository;
 import ru.itmo.service.CatService;
 
+@Service
+@EntityScan(basePackages = {"ru.itmo.*"})
+@ComponentScan({"ru.itmo.repository", "ru.itmo.service", "ru.itmo.service.impl"})
 public class CatServiceImpl implements CatService {
 
-  private final CatDao catDao = new CatDaoImpl();
+  private final CatRepository catRepository;
 
-  public CatServiceImpl() {
+  @Autowired
+  public CatServiceImpl(CatRepository catRepository) {
+    this.catRepository = catRepository;
   }
 
-  public Cat findCat(int id) {
-    return catDao.findCatById(id);
+  public List<Cat> getCats() {
+    List<CatDb> catsDb = catRepository.findAll();
+    List<Cat> cats = new ArrayList<>();
+    for (CatDb cat :
+        catsDb) {
+      cats.add(new CatImpl(
+          cat.getId(),
+          cat.getName(),
+          cat.getDateOfBirth(),
+          cat.getBreed(),
+          cat.getColor(),
+          cat.getOwner().getId()));
+    }
+    return cats;
+  }
+
+  public Cat getCat(int id) {
+    CatDb catDb = catRepository.getById(id);
+    return new CatImpl(
+        catDb.getId(),
+        catDb.getName(),
+        catDb.getDateOfBirth(),
+        catDb.getBreed(),
+        catDb.getColor(),
+        catDb.getOwner().getId());
   }
 
   public void saveCat(Cat cat) {
-    catDao.save(cat);
+    CatDb catDb = new CatDb(cat.getName(), cat.getDateOfBirth(), cat.getBreed(), cat.getColor());
+    catRepository.save(catDb);
   }
 
   public void deleteCat(Cat cat) {
-    catDao.delete(cat);
+    CatDb catDb = new CatDb(cat.getName(), cat.getDateOfBirth(), cat.getBreed(), cat.getColor());
+    catRepository.delete(catDb);
   }
 
   public void updateCat(Cat cat) {
-    catDao.update(cat);
+    //repository.update(cat)
   }
 }
