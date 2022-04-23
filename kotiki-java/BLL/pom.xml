@@ -4,46 +4,72 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.itmo.kotiki.bll</groupId>
-  <artifactId>business-logic-layer</artifactId>
+  <groupId>ru.itmo</groupId>
+  <artifactId>bll</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <mockito-core.version>4.4.0</mockito-core.version>
-    <junit.version>4.13.2</junit.version>
-    <junit-jupiter.version>5.8.2</junit-jupiter.version>
-    <testng.version>7.5</testng.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>org.itmo.kotiki.dal</groupId>
-      <artifactId>data-access-layer</artifactId>
+      <groupId>ru.itmo</groupId>
+      <artifactId>dal</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>5.3.18</version>
     </dependency>
+
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
       <version>2.6.7</version>
     </dependency>
+
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
       <version>2.6.6</version>
     </dependency>
+
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <artifactId>spring-boot</artifactId>
       <version>2.6.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.6.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.6.7.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.6.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>2.6.6</version>
     </dependency>
   </dependencies>
 </project>

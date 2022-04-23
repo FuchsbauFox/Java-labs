@@ -3,8 +3,6 @@ package ru.itmo.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import ru.itmo.entity.Cat;
 import ru.itmo.entity.impl.CatImpl;
@@ -13,16 +11,16 @@ import ru.itmo.repository.CatRepository;
 import ru.itmo.service.CatService;
 
 @Service
-@EntityScan(basePackages = {"ru.itmo.*"})
-@ComponentScan({"ru.itmo.repository", "ru.itmo.service", "ru.itmo.service.impl"})
 public class CatServiceImpl implements CatService {
 
-  private final CatRepository catRepository;
+  private CatRepository catRepository;
 
   @Autowired
   public CatServiceImpl(CatRepository catRepository) {
     this.catRepository = catRepository;
   }
+
+  public CatServiceImpl() {}
 
   public List<Cat> getCats() {
     List<CatDb> catsDb = catRepository.findAll();
@@ -62,6 +60,11 @@ public class CatServiceImpl implements CatService {
   }
 
   public void updateCat(Cat cat) {
-    //repository.update(cat)
+    CatDb catDb = catRepository.getById(cat.getId());
+    catDb.setBreed(cat.getBreed());
+    catDb.setColor(cat.getColor());
+    catDb.setDateOfBirth(cat.getDateOfBirth());
+    catDb.setName(cat.getName());
+    catRepository.save(catDb);
   }
 }

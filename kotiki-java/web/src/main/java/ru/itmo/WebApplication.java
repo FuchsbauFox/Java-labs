@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 @EnableJpaRepositories(basePackages = {"ru.itmo.repository"})
-@EntityScan(basePackages = {"ru.itmo.*"})
+@EntityScan(basePackages = {"ru.itmo"})
 @ComponentScan({"ru.itmo.repository", "ru.itmo.service", "ru.itmo.service.impl"})
 public class WebApplication {
 

@@ -1,7 +1,6 @@
 package ru.itmo.controller;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +12,11 @@ import ru.itmo.service.CatService;
 @RequestMapping("/cat")
 public class CatController {
 
-  @Autowired
-  private CatService service;
+  private final CatService service;
+
+  public CatController(CatService service) {
+    this.service = service;
+  }
 
   @GetMapping(value = "/getCats", produces = "application/json")
   public List<Cat> getCats() {

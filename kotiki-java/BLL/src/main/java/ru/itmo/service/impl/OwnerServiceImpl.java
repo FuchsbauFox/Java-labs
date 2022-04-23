@@ -71,6 +71,9 @@ public class OwnerServiceImpl implements OwnerService {
   }
 
   public void updateOwner(Owner owner) {
-    //repository.update(owner);
+    OwnerDb ownerDb = ownerRepository.getById(owner.getId());
+    ownerDb.setName(owner.getName());
+    ownerDb.setDateOfBirth(owner.getDateOfBirth());
+    ownerRepository.save(ownerDb);
   }
 }
