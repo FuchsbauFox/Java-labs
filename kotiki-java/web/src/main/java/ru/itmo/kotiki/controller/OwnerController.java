@@ -1,7 +1,7 @@
 package ru.itmo.kotiki.controller;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,29 +14,29 @@ import ru.itmo.kotiki.exception.ValidationException;
 import ru.itmo.kotiki.service.OwnerService;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/owner")
 public class OwnerController {
 
-  private final OwnerService ownerService;
+  @Autowired
+  private OwnerService ownerService;
 
   @PostMapping("/save")
-  public OwnerDto saveCat(@RequestBody OwnerDto ownerDto) throws ValidationException {
+  public OwnerDto saveOwner(@RequestBody OwnerDto ownerDto) throws ValidationException {
     return ownerService.saveOwner(ownerDto);
   }
 
-  @DeleteMapping("/delete/{id}")
-  public void deleteCat(@PathVariable Integer id) {
+  @DeleteMapping("/deleteById/{id}")
+  public void deleteOwner(@PathVariable Integer id) {
     ownerService.deleteOwner(id);
   }
 
-  @GetMapping(value = "/getOwner/{id}")
-  public OwnerDto getCat(@PathVariable int id) {
+  @GetMapping(value = "/getById/{id}")
+  public OwnerDto getOwner(@PathVariable int id) {
     return ownerService.getOwner(id);
   }
 
-  @GetMapping(value = "/getOwners", produces = "application/json")
-  public List<OwnerDto> getCats() {
+  @GetMapping(value = "/getAll", produces = "application/json")
+  public List<OwnerDto> getOwners() {
     return ownerService.getOwners();
   }
 

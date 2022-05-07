@@ -4,19 +4,19 @@ import static java.util.Objects.isNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itmo.kotiki.entity.OwnerDto;
 import ru.itmo.kotiki.exception.ValidationException;
-import ru.itmo.kotiki.model.Owner;
 import ru.itmo.kotiki.model.Cat;
+import ru.itmo.kotiki.model.Owner;
 import ru.itmo.kotiki.repository.OwnerRepository;
 
 @Component
-@AllArgsConstructor
 public class OwnerConverterImpl implements OwnerConverter {
 
-  private final OwnerRepository ownerRepository;
+  @Autowired
+  private OwnerRepository ownerRepository;
 
   @Override
   public OwnerDto saveOwner(OwnerDto ownerDto) throws ValidationException {
@@ -51,6 +51,9 @@ public class OwnerConverterImpl implements OwnerConverter {
     if (isNull(ownerDto)) {
       throw new ValidationException("Object owner is null");
     }
+    if (ownerDto.getId() <= 0) {
+      throw new ValidationException("Impossible Id");
+    }
   }
 
   private Owner fromOwnerDtoToOwner(OwnerDto ownerDto) {
@@ -67,11 +70,13 @@ public class OwnerConverterImpl implements OwnerConverter {
       catsId.add(cat.getId());
     }
 
-    return OwnerDto.builder()
-        .id(owner.getId())
-        .name(owner.getName())
-        .dateOfBirth(owner.getDateOfBirth())
-        .catsId(catsId)
-        .build();
+    OwnerDto ownerDto = new OwnerDto();
+
+    ownerDto.setId(owner.getId());
+    ownerDto.setName(owner.getName());
+    ownerDto.setDateOfBirth(owner.getDateOfBirth());
+    ownerDto.setCatsId(catsId);
+
+    return ownerDto;
   }
 }

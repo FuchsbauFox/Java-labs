@@ -1,7 +1,7 @@
 package ru.itmo.kotiki.controller;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,28 +15,28 @@ import ru.itmo.kotiki.service.CatService;
 
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/cat")
 public class CatController {
 
-  private final CatService catService;
+  @Autowired
+  private CatService catService;
 
   @PostMapping("/save")
   public CatDto saveCat(@RequestBody CatDto catDto) throws ValidationException {
     return catService.saveCat(catDto);
   }
 
-  @DeleteMapping("/delete/{id}")
+  @DeleteMapping("/deleteById/{id}")
   public void deleteCat(@PathVariable Integer id) {
     catService.deleteCat(id);
   }
 
-  @GetMapping(value = "/getCat/{id}")
+  @GetMapping(value = "/getById/{id}")
   public CatDto getCat(@PathVariable int id) {
     return catService.getCat(id);
   }
 
-  @GetMapping(value = "/getCats", produces = "application/json")
+  @GetMapping(value = "/getAll", produces = "application/json")
   public List<CatDto> getCats() {
     return catService.getCats();
   }

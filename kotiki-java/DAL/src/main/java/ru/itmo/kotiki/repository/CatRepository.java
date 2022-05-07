@@ -6,4 +6,5 @@ import ru.itmo.kotiki.model.Cat;
 
 @Repository
 public interface CatRepository extends JpaRepository<Cat, Integer> {
+
 }

@@ -1,25 +1,25 @@
 package ru.itmo.kotiki.model;
 
-import lombok.NoArgsConstructor;
-import ru.itmo.kotiki.accessory.Color;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import ru.itmo.kotiki.accessory.Color;
 
 @Entity
 @Table(name = "cats")
-@NoArgsConstructor
 public class Cat {
 
   @Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "cat_id")
   private int id;
 
@@ -47,6 +47,9 @@ public class Cat {
     this.breed = breed;
     this.color = color;
     owner = new Owner();
+  }
+
+  public Cat() {
   }
 
   public int getId() {

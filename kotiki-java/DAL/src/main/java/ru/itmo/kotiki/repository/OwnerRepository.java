@@ -6,4 +6,5 @@ import ru.itmo.kotiki.model.Owner;
 
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Integer> {
+
 }

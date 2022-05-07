@@ -1,7 +1,7 @@
 package ru.itmo.kotiki.service;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itmo.kotiki.converter.CatConverter;
 import ru.itmo.kotiki.entity.CatDto;
@@ -9,10 +9,10 @@ import ru.itmo.kotiki.exception.ValidationException;
 
 
 @Service
-@AllArgsConstructor
 public class CatServiceImpl implements CatService {
 
-  private final CatConverter catConverter;
+  @Autowired
+  private CatConverter catConverter;
 
   @Override
   public CatDto saveCat(CatDto catDto) throws ValidationException {

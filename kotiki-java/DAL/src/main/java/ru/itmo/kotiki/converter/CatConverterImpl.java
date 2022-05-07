@@ -4,7 +4,7 @@ import static java.util.Objects.isNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itmo.kotiki.accessory.Color;
 import ru.itmo.kotiki.entity.CatDto;
@@ -14,11 +14,13 @@ import ru.itmo.kotiki.repository.CatRepository;
 import ru.itmo.kotiki.repository.OwnerRepository;
 
 @Component
-@AllArgsConstructor
 public class CatConverterImpl implements CatConverter {
 
-  private final CatRepository catRepository;
-  private final OwnerRepository ownerRepository;
+  @Autowired
+  private CatRepository catRepository;
+
+  @Autowired
+  private OwnerRepository ownerRepository;
 
   @Override
   public CatDto saveCat(CatDto catDto) throws ValidationException {
@@ -49,13 +51,44 @@ public class CatConverterImpl implements CatConverter {
     return catsDto;
   }
 
+  private static CatDto fromCatToCatDto(Cat cat) {
+    CatDto catDto = new CatDto();
+
+    catDto.setId(cat.getId());
+    catDto.setName(cat.getName());
+    catDto.setDateOfBirth(cat.getDateOfBirth());
+    catDto.setBreed(cat.getBreed());
+    catDto.setColor(cat.getColor().toString());
+    catDto.setOwnerId(cat.getOwner().getId());
+
+    return catDto;
+  }
+
+  private boolean checkColor(String color) {
+    for (Color c : Color.values()) {
+      if (c.name().equals(color)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private void validateCatDto(CatDto catDto) throws ValidationException {
     if (isNull(catDto)) {
       throw new ValidationException("Object cat is null");
     }
+    if (!checkColor(catDto.getColor())) {
+      throw new ValidationException("Color not found");
+    }
+    if (catDto.getId() <= 0) {
+      throw new ValidationException("Impossible Id");
+    }
+    if (catDto.getOwnerId() <= 0) {
+      throw new ValidationException("Impossible ownerId");
+    }
   }
 
-  public Cat fromCatDtoToCat(CatDto catDto) {
+  private Cat fromCatDtoToCat(CatDto catDto) {
     Cat cat = new Cat(catDto.getId(),
         catDto.getName(),
         catDto.getDateOfBirth(),
@@ -64,16 +97,5 @@ public class CatConverterImpl implements CatConverter {
     cat.setOwner(ownerRepository.getById(catDto.getOwnerId()));
 
     return cat;
-  }
-
-  public static CatDto fromCatToCatDto(Cat cat) {
-    return CatDto.builder()
-        .id(cat.getId())
-        .name(cat.getName())
-        .dateOfBirth(cat.getDateOfBirth())
-        .breed(cat.getBreed())
-        .color(cat.getColor().toString())
-        .ownerId(cat.getOwner().getId())
-        .build();
   }
 }

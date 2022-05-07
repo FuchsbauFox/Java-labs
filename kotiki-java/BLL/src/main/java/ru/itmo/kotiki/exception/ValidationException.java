@@ -1,6 +1,6 @@
 package ru.itmo.kotiki.exception;
 
-public class ValidationException extends Exception {
+public class ValidationException extends RuntimeException {
 
   private String message;
 
