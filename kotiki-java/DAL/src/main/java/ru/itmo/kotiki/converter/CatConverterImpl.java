@@ -52,16 +52,12 @@ public class CatConverterImpl implements CatConverter {
   }
 
   private static CatDto fromCatToCatDto(Cat cat) {
-    CatDto catDto = new CatDto();
-
-    catDto.setId(cat.getId());
-    catDto.setName(cat.getName());
-    catDto.setDateOfBirth(cat.getDateOfBirth());
-    catDto.setBreed(cat.getBreed());
-    catDto.setColor(cat.getColor().toString());
-    catDto.setOwnerId(cat.getOwner().getId());
-
-    return catDto;
+    return new CatDto(cat.getId(),
+        cat.getName(),
+        cat.getDateOfBirth(),
+        cat.getBreed(),
+        cat.getColor().toString(),
+        cat.getOwner().getId());
   }
 
   private boolean checkColor(String color) {

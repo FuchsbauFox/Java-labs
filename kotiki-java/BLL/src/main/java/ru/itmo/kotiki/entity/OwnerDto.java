@@ -5,40 +5,31 @@ import java.util.List;
 
 public class OwnerDto {
 
-  private int id;
-  private String name;
-  private Date dateOfBirth;
-  private List<Integer> catsId;
+  private final int id;
+  private final String name;
+  private final Date dateOfBirth;
+  private final List<Integer> catsId;
+
+  public OwnerDto(int id, String name, Date dateOfBirth, List<Integer> catsId) {
+    this.id = id;
+    this.name = name;
+    this.dateOfBirth = dateOfBirth;
+    this.catsId = catsId;
+  }
 
   public int getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public Date getDateOfBirth() {
     return dateOfBirth;
   }
 
-  public void setDateOfBirth(Date dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
-
   public List<Integer> getCatsId() {
     return catsId;
-  }
-
-  public void setCatsId(List<Integer> catsId) {
-    this.catsId = catsId;
   }
 }

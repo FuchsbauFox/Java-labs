@@ -26,7 +26,7 @@ public class CatController {
     return catService.saveCat(catDto);
   }
 
-  @DeleteMapping("/deleteById/{id}")
+  @DeleteMapping("/byId/{id}")
   public void deleteCat(@PathVariable Integer id) {
     catService.deleteCat(id);
   }

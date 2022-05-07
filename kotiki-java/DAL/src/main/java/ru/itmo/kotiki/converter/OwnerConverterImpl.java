@@ -70,13 +70,9 @@ public class OwnerConverterImpl implements OwnerConverter {
       catsId.add(cat.getId());
     }
 
-    OwnerDto ownerDto = new OwnerDto();
-
-    ownerDto.setId(owner.getId());
-    ownerDto.setName(owner.getName());
-    ownerDto.setDateOfBirth(owner.getDateOfBirth());
-    ownerDto.setCatsId(catsId);
-
-    return ownerDto;
+    return new OwnerDto(owner.getId(),
+        owner.getName(),
+        owner.getDateOfBirth(),
+        catsId);
   }
 }

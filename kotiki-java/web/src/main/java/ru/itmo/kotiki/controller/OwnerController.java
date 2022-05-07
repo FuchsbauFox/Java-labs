@@ -25,7 +25,7 @@ public class OwnerController {
     return ownerService.saveOwner(ownerDto);
   }
 
-  @DeleteMapping("/deleteById/{id}")
+  @DeleteMapping("/byId/{id}")
   public void deleteOwner(@PathVariable Integer id) {
     ownerService.deleteOwner(id);
   }
