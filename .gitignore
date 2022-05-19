@@ -9,6 +9,11 @@ kotiki-java/dal/target/*
 kotiki-java/web/target/*
 lib/*
 
+kotiki-java/bll/target/*
+kotiki-java/dal/target/*
+kotiki-java/web/target/*
+lib/*
+
 
 # AWS User-specific
 .idea/**/aws.xml
