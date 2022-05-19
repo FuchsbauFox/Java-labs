@@ -4,6 +4,11 @@
 # User-specific stuff
 banks-java/.idea/
 
+kotiki-java/bll/target/*
+kotiki-java/dal/target/*
+kotiki-java/web/target/*
+lib/*
+
 
 # AWS User-specific
 banks-java/.idea/**/aws.xml
