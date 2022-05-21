@@ -1,7 +1,10 @@
 package ru.itmo.kotiki.controller;
 
 import java.util.List;
+import org.h2.security.auth.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,30 +27,42 @@ public class CatController {
   private CatService catService;
 
   @PostMapping("/save")
-  public CatDto save(@RequestBody CatDto catDto) throws ValidationException {
-    JwtUserDetails userDetails = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    int ownerId = userDetails.getOwnerId();
-    return catService.save(ownerId, catDto);
+  public CatDto save(@RequestBody CatDto catDto) throws ValidationException, AuthenticationException {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      String currentUsername = authentication.getName();
+      return catService.save(currentUsername, catDto);
+    }
+    throw new AuthenticationException("403");
   }
 
   @DeleteMapping("/byId/{id}")
   public void deleteById(@PathVariable Integer id) {
-    JwtUserDetails userDetails = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    int ownerId = userDetails.getOwnerId();
-    catService.deleteById(ownerId, id);
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      String currentUsername = authentication.getName();
+      catService.deleteById(currentUsername, id);
+    }
   }
 
   @GetMapping(value = "/getById/{id}")
-  public CatDto findById(@PathVariable int id) {
-    JwtUserDetails userDetails = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    int ownerId = userDetails.getOwnerId();
-    return catService.findById(ownerId, id);
+  public CatDto findById(@PathVariable int id) throws AuthenticationException {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      String currentUsername = authentication.getName();
+      return catService.findById(currentUsername, id);
+    }
+    throw new AuthenticationException("403");
   }
 
   @GetMapping(value = "/getAll", produces = "application/json")
-  public List<CatDto> findAll() {
-    JwtUserDetails userDetails = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    int ownerId = userDetails.getOwnerId();
-    return catService.findAllByOwner(ownerId);
+  public List<CatDto> findAll() throws AuthenticationException {
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      String currentUsername = authentication.getName();
+      return catService.findAllByOwner(currentUsername);
+    }
+    throw new AuthenticationException("403");
   }
 }

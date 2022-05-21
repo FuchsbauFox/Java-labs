@@ -11,8 +11,7 @@ import ru.itmo.kotiki.model.Cat;
 import ru.itmo.kotiki.model.accessory.Color;
 import ru.itmo.kotiki.exception.ValidationException;
 import ru.itmo.kotiki.repository.CatRepository;
-import ru.itmo.kotiki.repository.OwnerRepository;
-import ru.itmo.kotiki.service.CatService;
+import ru.itmo.kotiki.repository.UserRepository;
 
 @Service
 public class CatServiceImpl implements CatService {
@@ -21,37 +20,37 @@ public class CatServiceImpl implements CatService {
   private CatRepository catRepository;
 
   @Autowired
-  private OwnerRepository ownerRepository;
+  private UserRepository userRepository;
 
   @Override
-  public CatDto save(int ownerId, CatDto catDto) throws ValidationException {
+  public CatDto save(String username, CatDto catDto) throws ValidationException {
     validateCatDto(catDto);
     Cat cat = catDto.toCat();
-    cat.setOwner(ownerRepository.getById(ownerId));
+    cat.setOwner(userRepository.findByUsername(username).getOwner());
     return new CatDto(catRepository.save(cat));
   }
 
   @Override
-  public void deleteById(int ownerId, int id) {
-    if (ownerId != catRepository.getById(id).getOwner().getId()){
+  public void deleteById(String username, int id) {
+    if (userRepository.findByUsername(username).getOwner().getId() != catRepository.getById(id).getOwner().getId()){
       throw new ValidationException("Cat " + id + " not found");
     }
     catRepository.deleteById(id);
   }
 
   @Override
-  public CatDto findById(int ownerId, int id) {
+  public CatDto findById(String username, int id) {
     Cat cat = catRepository.getById(id);
-    if (ownerId != cat.getOwner().getId()){
+    if (userRepository.findByUsername(username).getOwner().getId() != cat.getOwner().getId()){
       throw new ValidationException("Cat " + id + " not found");
     }
     return new CatDto(cat);
   }
 
   @Override
-  public List<CatDto> findAllByOwner(int ownerId) {
+  public List<CatDto> findAllByOwner(String username) {
     List<CatDto> catsDto = new ArrayList<>();
-    for(Cat cat : catRepository.findAllByOwnerId(ownerId)) {
+    for(Cat cat : catRepository.findAllByOwnerId(userRepository.findByUsername(username).getOwner().getId())) {
       catsDto.add(new CatDto(cat));
     }
     return catsDto;

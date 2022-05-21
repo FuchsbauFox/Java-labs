@@ -6,11 +6,11 @@ import ru.itmo.kotiki.exception.ValidationException;
 
 public interface CatService {
 
-  CatDto save(int ownerId, CatDto catDto) throws ValidationException;
+  CatDto save(String username, CatDto catDto) throws ValidationException;
 
-  void deleteById(int ownerId, int id);
+  void deleteById(String username, int id);
 
-  CatDto findById(int ownerId, int id);
+  CatDto findById(String username, int id);
 
-  List<CatDto> findAllByOwner(int ownerId);
+  List<CatDto> findAllByOwner(String username);
 }
