@@ -1,18 +1,17 @@
 package ru.itmo.kotiki.model;
 
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import ru.itmo.kotiki.model.accessory.Role;
 
 @Entity
 @Table(name = "users")
@@ -29,13 +28,29 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "role")
-  @Enumerated(EnumType.STRING)
-  private Role role;
-
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owner_id")
   private Owner owner;
+
+  @Column(name = "status")
+  private boolean status;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "user_roles",
+      joinColumns = {@JoinColumn(name = "user_id")},
+      inverseJoinColumns = {@JoinColumn(name = "role_id")})
+  private List<Role> roles;
+
+  public User() {
+  }
+
+  public User(String username, String password, boolean status, List<Role> roles, Owner owner) {
+    this.username = username;
+    this.password = password;
+    this.status = status;
+    this.roles = roles;
+    this.owner = owner;
+  }
 
   public int getId() {
     return id;
@@ -61,19 +76,27 @@ public class User {
     this.password = password;
   }
 
-  public Role getRole() {
-    return role;
-  }
-
-  public void setRole(Role role) {
-    this.role = role;
-  }
-
   public Owner getOwner() {
     return owner;
   }
 
   public void setOwner(Owner owner) {
     this.owner = owner;
+  }
+
+  public List<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<Role> roles) {
+    this.roles = roles;
+  }
+
+  public boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
   }
 }

@@ -32,16 +32,15 @@ public class Cat {
   @Column(name = "breed")
   private String breed;
 
-  @Column(name = "color")
   @Enumerated(EnumType.STRING)
+  @Column(name = "color")
   private Color color;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owner_id")
   private Owner owner;
 
-  public Cat(int id, String name, Date dateOfBirth, String breed, Color color) {
-    this.id = id;
+  public Cat(String name, Date dateOfBirth, String breed, Color color) {
     this.name = name;
     this.dateOfBirth = dateOfBirth;
     this.breed = breed;
@@ -54,6 +53,10 @@ public class Cat {
 
   public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -98,11 +101,13 @@ public class Cat {
 
   @Override
   public String toString() {
-    return "id=" + id +
-        ", name='" + name +
-        ", birth date=" + dateOfBirth.getTime() +
-        " breed=" + breed +
-        "color=" + color +
-        "owner=" + owner.getId();
+    return "Cat{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", dateOfBirth=" + dateOfBirth +
+        ", breed='" + breed + '\'' +
+        ", color=" + color +
+        ", owner=" + owner.getId() +
+        '}';
   }
 }

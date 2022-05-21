@@ -9,7 +9,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"ru.itmo.kotiki.repository"})
 @EntityScan(basePackages = {"ru.itmo"})
-@ComponentScan({"ru.itmo.kotiki.repository", "ru.itmo.kotiki.service", "ru.itmo.kotiki.controller", "ru.itmo.kotiki.converter"})
+@ComponentScan({
+		"ru.itmo.kotiki.repository",
+		"ru.itmo.kotiki.service",
+		"ru.itmo.kotiki.controller",
+		"ru.itmo.kotiki.security",
+		"ru.itmo.kotiki.config"})
 public class WebApplication {
 
 	public static void main(String[] args) {

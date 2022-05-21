@@ -34,8 +34,7 @@ public class Owner {
   @OneToOne(mappedBy = "owner")
   private User user;
 
-  public Owner(int id, String name, Date dateOfBirth) {
-    this.id = id;
+  public Owner(String name, Date dateOfBirth) {
     this.name = name;
     this.dateOfBirth = dateOfBirth;
     cats = new ArrayList<Cat>();
@@ -46,6 +45,10 @@ public class Owner {
 
   public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -72,21 +75,21 @@ public class Owner {
     this.cats = cats;
   }
 
-  public void addCat(Cat cat) {
-    cat.setOwner(this);
-    cats.add(cat);
+  public User getUser() {
+    return user;
   }
 
-  public void removeCat(Cat auto) {
-    cats.remove(auto);
+  public void setUser(User user) {
+    this.user = user;
   }
-
 
   @Override
   public String toString() {
-    return "id=" + id +
-        ", name='" + name +
-        ", birth date=" + dateOfBirth.toString();
+    return "Owner{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", dateOfBirth=" + dateOfBirth +
+        ", user=" + user.getId() +
+        '}';
   }
-
 }
