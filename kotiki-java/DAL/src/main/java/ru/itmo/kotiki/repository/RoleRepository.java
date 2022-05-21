@@ -5,5 +5,5 @@ import ru.itmo.kotiki.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
-  Role findByName(String name);
+  Role findByRole(String role);
 }

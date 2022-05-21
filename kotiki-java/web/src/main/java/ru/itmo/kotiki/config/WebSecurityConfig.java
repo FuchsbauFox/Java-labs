@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-    String authoritiesByUsernameQuery = "select username, name from users " +
+    String authoritiesByUsernameQuery = "select username, role from users " +
         "inner join user_roles on users.user_id = user_roles.user_id " +
         "inner join roles on roles.role_id = user_roles.role_id " +
         "where username = ?";
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
         .antMatchers("/admin/**").hasRole("ADMIN")
         .antMatchers("/myCat/**").hasRole("USER")
-        //.anyRequest().authenticated()
+        .anyRequest().authenticated()
         .and()
         .formLogin().permitAll()
         .and()

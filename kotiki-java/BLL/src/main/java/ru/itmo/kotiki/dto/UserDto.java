@@ -10,7 +10,7 @@ import ru.itmo.kotiki.model.User;
 public class UserDto {
   private String username;
   private String password;
-  private boolean status;
+  private boolean enabled;
   private List<String> roles;
 
   private String name;
@@ -19,10 +19,10 @@ public class UserDto {
   public UserDto fromUserAndOwner(User user, Owner owner) {
     username = user.getUsername();
     password = user.getPassword();
-    status = user.getStatus();
+    enabled = user.isEnabled();
     roles = new ArrayList<>();
     for(Role role : user.getRoles()) {
-      roles.add(role.getName());
+      roles.add(role.getRole());
     }
     name = owner.getName();
     dateOfBirth = owner.getDateOfBirth();
@@ -45,12 +45,12 @@ public class UserDto {
     this.password = password;
   }
 
-  public boolean getStatus() {
-    return status;
+  public boolean isEnabled() {
+    return enabled;
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 
   public List<String> getRoles() {

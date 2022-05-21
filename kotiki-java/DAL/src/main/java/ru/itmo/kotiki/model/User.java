@@ -32,8 +32,8 @@ public class User {
   @JoinColumn(name = "owner_id")
   private Owner owner;
 
-  @Column(name = "status")
-  private boolean status;
+  @Column(name = "enabled")
+  private boolean enabled;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_roles",
@@ -44,10 +44,10 @@ public class User {
   public User() {
   }
 
-  public User(String username, String password, boolean status, List<Role> roles, Owner owner) {
+  public User(String username, String password, boolean enabled, List<Role> roles, Owner owner) {
     this.username = username;
     this.password = password;
-    this.status = status;
+    this.enabled = enabled;
     this.roles = roles;
     this.owner = owner;
   }
@@ -92,11 +92,11 @@ public class User {
     this.roles = roles;
   }
 
-  public boolean getStatus() {
-    return status;
+  public boolean isEnabled() {
+    return enabled;
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 }

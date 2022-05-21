@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"ru.itmo.kotiki.repository"})
-@EntityScan(basePackages = {"ru.itmo"})
+@EntityScan(basePackages = {"ru.itmo.kotiki"})
 @ComponentScan({
 		"ru.itmo.kotiki.repository",
 		"ru.itmo.kotiki.service",

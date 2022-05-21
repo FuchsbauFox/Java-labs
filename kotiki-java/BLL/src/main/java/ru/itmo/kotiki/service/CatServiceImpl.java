@@ -1,4 +1,4 @@
-package ru.itmo.kotiki.service.impl;
+package ru.itmo.kotiki.service;
 
 import static java.util.Objects.isNull;
 

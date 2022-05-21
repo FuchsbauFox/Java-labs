@@ -26,7 +26,7 @@ public class JwtUserDetails implements UserDetails {
     this.enabled = enabled;
     List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
     for(Role role : roles) {
-      authorityList.add(new SimpleGrantedAuthority(role.getName()));
+      authorityList.add(new SimpleGrantedAuthority(role.getRole()));
     }
     this.authorities = authorityList;
   }

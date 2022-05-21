@@ -1,4 +1,4 @@
-package ru.itmo.kotiki.service.impl;
+package ru.itmo.kotiki.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +30,13 @@ public class AdminServiceImpl implements AdminService {
     Owner owner = ownerRepository.save(new Owner(userDto.getName(), userDto.getDateOfBirth()));
 
     List<Role> roles = new ArrayList<>();
-    for(String roleName : userDto.getRoles()) {
-      roles.add(roleRepository.findByName(roleName));
+    for(String role : userDto.getRoles()) {
+      roles.add(roleRepository.findByRole(role));
     }
     userRepository.save(new User(
         userDto.getUsername(),
         userDto.getPassword(),
-        userDto.getStatus(),
+        userDto.isEnabled(),
         roles,
         owner));
   }
