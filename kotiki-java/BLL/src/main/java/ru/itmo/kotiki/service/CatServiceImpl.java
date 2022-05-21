@@ -28,7 +28,7 @@ public class CatServiceImpl implements CatService {
     validateCatDto(catDto);
     Cat cat = catDto.toCat();
     cat.setOwner(ownerRepository.getById(ownerId));
-    return catDto.fromCat(catRepository.save(cat));
+    return new CatDto(catRepository.save(cat));
   }
 
   @Override
@@ -45,16 +45,14 @@ public class CatServiceImpl implements CatService {
     if (ownerId != cat.getOwner().getId()){
       throw new ValidationException("Cat " + id + " not found");
     }
-    CatDto catDto = new CatDto();
-    return catDto.fromCat(cat);
+    return new CatDto(cat);
   }
 
   @Override
   public List<CatDto> findAllByOwner(int ownerId) {
     List<CatDto> catsDto = new ArrayList<>();
     for(Cat cat : catRepository.findAllByOwnerId(ownerId)) {
-      CatDto catDto = new CatDto();
-      catsDto.add(catDto.fromCat(cat));
+      catsDto.add(new CatDto(cat));
     }
     return catsDto;
   }

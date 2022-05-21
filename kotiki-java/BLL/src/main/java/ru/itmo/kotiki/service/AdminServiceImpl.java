@@ -43,23 +43,20 @@ public class AdminServiceImpl implements AdminService {
 
   @Override
   public UserDto findByUserId(int id) {
-    UserDto userDto = new UserDto();
     User user = userRepository.getById(id);
-    return userDto.fromUserAndOwner(user, user.getOwner());
+    return new UserDto(user, user.getOwner());
   }
 
   @Override
   public UserDto findByOwnerId(int id) {
-    UserDto userDto = new UserDto();
     Owner owner = ownerRepository.getById(id);
-    return userDto.fromUserAndOwner(owner.getUser(), owner);
+    return new UserDto(owner.getUser(), owner);
   }
 
   @Override
   public UserDto findByUsername(String username) {
-    UserDto userDto = new UserDto();
     User user = userRepository.findByUsername(username);
-    return userDto.fromUserAndOwner(user, user.getOwner());
+    return new UserDto(user, user.getOwner());
   }
 
   @Override
@@ -78,8 +75,7 @@ public class AdminServiceImpl implements AdminService {
     List<User> users = userRepository.findAll();
     List<UserDto> usersDto = new ArrayList<>();
     for(User user : users) {
-      UserDto userDto = new UserDto();
-      usersDto.add(userDto.fromUserAndOwner(user, user.getOwner()));
+      usersDto.add(new UserDto(user, user.getOwner()));
     }
 
     return usersDto;
