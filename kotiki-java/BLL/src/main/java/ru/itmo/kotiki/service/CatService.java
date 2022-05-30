@@ -1,16 +1,16 @@
 package ru.itmo.kotiki.service;
 
 import java.util.List;
-import ru.itmo.kotiki.entity.CatDto;
+import ru.itmo.kotiki.dto.CatDto;
 import ru.itmo.kotiki.exception.ValidationException;
 
 public interface CatService {
 
-  CatDto saveCat(CatDto cat) throws ValidationException;
+  CatDto save(String username, CatDto catDto) throws ValidationException;
 
-  void deleteCat(int id);
+  void deleteById(String username, int id);
 
-  CatDto getCat(int id);
+  CatDto findById(String username, int id);
 
-  List<CatDto> getCats();
+  List<CatDto> findAllByOwner(String username);
 }

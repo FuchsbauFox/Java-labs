@@ -1,4 +1,4 @@
-package ru.itmo.kotiki.accessory;
+package ru.itmo.kotiki.model.accessory;
 
 public enum Color {
   MACKEREL_TABBY,
