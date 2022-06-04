@@ -26,6 +26,16 @@ public final class UserDto {
     }
   }
 
+  public UserDto(int id, String username, String password, int ownerId, boolean enabled,
+      List<String> roles) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.ownerId = ownerId;
+    this.enabled = enabled;
+    this.roles = roles;
+  }
+
   public int getId() {
     return id;
   }

@@ -24,6 +24,15 @@ public final class OwnerDto {
     this.userId = owner.getUser().getId();
   }
 
+  public OwnerDto(int id, String name, Date dateOfBirth,
+      List<CatDto> cats, int userId) {
+    this.id = id;
+    this.name = name;
+    this.dateOfBirth = dateOfBirth;
+    this.cats = cats;
+    this.userId = userId;
+  }
+
   public int getId() {
     return id;
   }

@@ -17,6 +17,13 @@ public final class CatDto {
     this.color = cat.getColor().toString();
   }
 
+  public CatDto(String name, Date dateOfBirth, String breed, String color) {
+    this.name = name;
+    this.dateOfBirth = dateOfBirth;
+    this.breed = breed;
+    this.color = color;
+  }
+
   public Cat toCat() {
     return new Cat(name, dateOfBirth, breed, Color.valueOf(color));
   }
