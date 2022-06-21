@@ -2,6 +2,7 @@ package ru.itmo.kotiki.ui.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itmo.kotiki.dto.OwnerDto;
@@ -16,7 +17,7 @@ import ru.itmo.kotiki.ui.repository.UserRepository;
 public class UserServiceImpl implements UserService{
 
   @Autowired
-  private OwnerRepository ownerRepository;
+  private RabbitTemplate rabbitTemplate;
 
   @Autowired
   private UserRepository userRepository;
@@ -26,8 +27,7 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public void registrationUser(UserDto userDto, OwnerDto ownerDto) {
-    Owner owner = ownerRepository.save(new Owner(ownerDto.getName(), ownerDto.getDateOfBirth()));
-
+    Owner owner = (Owner) rabbitTemplate.convertSendAndReceive("saveOwner", ownerDto);
     List<Role> roles = new ArrayList<>();
     for(String role : userDto.getRoles()) {
       roles.add(roleRepository.findByRole(role));

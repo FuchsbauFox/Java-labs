@@ -10,8 +10,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
   @Bean
-  public DirectExchange catsDirectExchange() {
+  public DirectExchange ownersDirectExchange() {
     return new DirectExchange("owners-exchange");
+  }
+
+  @Bean
+  public Queue saveOwner() {
+    return new Queue("saveOwnerQueue");
   }
 
   @Bean
@@ -20,7 +25,22 @@ public class RabbitConfig {
   }
 
   @Bean
+  public Queue addCat() {
+    return new Queue("addCatQueue");
+  }
+
+  @Bean
+  public Binding bindSave() {
+    return BindingBuilder.bind(saveOwner()).to(ownersDirectExchange()).with("saveOwner");
+  }
+
+  @Bean
   public Binding bindFindOwnerById() {
-    return BindingBuilder.bind(findOwnerById()).to(catsDirectExchange()).with("findOwnerById");
+    return BindingBuilder.bind(findOwnerById()).to(ownersDirectExchange()).with("findOwnerById");
+  }
+
+  @Bean
+  public Binding bindAddCat() {
+    return BindingBuilder.bind(addCat()).to(ownersDirectExchange()).with("addCat");
   }
 }

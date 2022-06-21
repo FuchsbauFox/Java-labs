@@ -1,11 +1,9 @@
 package ru.itmo.kotiki.ui.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.h2.security.auth.AuthenticationException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,17 +20,13 @@ public class OwnerController {
   @Autowired
   private RabbitTemplate rabbitTemplate;
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   @GetMapping(value = "/getMyInfo")
-  public ResponseEntity<OwnerDto> findOwner() throws AuthenticationException, JsonProcessingException {
+  public OwnerDto findOwner() throws AuthenticationException, JsonProcessingException {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     if (!(authentication instanceof AnonymousAuthenticationToken)) {
       JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
-      OwnerDto ownerDto = new OwnerDto(jwtUserDetails.getOwnerId(), null, null, null, jwtUserDetails.getId());
-      String rabbitResponse = (String) rabbitTemplate.convertSendAndReceive("ownerQueue", objectMapper.writeValueAsString(ownerDto));
-      return ResponseEntity.ok(objectMapper.readValue(rabbitResponse, OwnerDto.class));
+      int ownerId = jwtUserDetails.getOwnerId();
+      return (OwnerDto) rabbitTemplate.convertSendAndReceive("findOwnerById", ownerId);
     }
     throw new AuthenticationException("403");
   }

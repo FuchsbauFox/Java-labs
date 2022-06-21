@@ -17,7 +17,7 @@ public class RabbitConfig {
 
   @Bean
   public Queue saveCat() {
-    return new Queue("saveQueue");
+    return new Queue("saveCatQueue");
   }
 
   @Bean
@@ -36,7 +36,7 @@ public class RabbitConfig {
   }
 
   @Bean
-  public Binding bindSaveCatQueue() {
+  public Binding bindSaveCat() {
     return BindingBuilder.bind(saveCat()).to(catsDirectExchange()).with("saveCat");
   }
 

@@ -75,6 +75,10 @@ public class Owner {
     this.cats = cats;
   }
 
+  public void addCat(Cat cat) {
+    this.cats.add(cat);
+  }
+
   public User getUser() {
     return user;
   }
